@@ -6,7 +6,7 @@ date created: 2018-04-30
 
 ## Subroutines
 def tryAgain(usr):
-    if usr in ('Y', 'y', ' '):
+    if usr in ('Y', 'y', ''):
         return True
     elif usr in ('N', 'n'):
         return False
@@ -31,7 +31,7 @@ def chkPos(num):
         return chkPos(num)
 
 ## Arrays
-solubilityF = (('F', -1), (('Li', 'Mg', 'Ca', 'Sr', 'Ba', 'Fe', 'Hg2', 'Pb'), (1, 2, 2, 2, 2, 2, 2, 2))) ## Charges added at the end to allow me to find charge of element quickly
+solubilityF = (('F', -1), (('LYi', 'Mg', 'Ca', 'Sr', 'Ba', 'Fe', 'Hg2', 'Pb'), (1, 2, 2, 2, 2, 2, 2, 2))) ## Charges added at the end to allow me to find charge of element quickly
 solubilityCl = (('Cl', 'Br', 'I', -1), (('Cu', 'Ag', 'Hg2', 'Pb', 'Tl'), (1, 1, 2, 2, 1)))
 solubilitySO = (('So4', -2), (('Ca', 'Sr', 'Ba', 'Ag', 'Hg2', 'Pb', 'Ra'), (2, 2, 2, 1, 2, 2, 2)))
 
