@@ -35,7 +35,7 @@ solubilityF = (('F', -1), (('Li', 'Mg', 'Ca', 'Sr', 'Ba', 'Fe', 'Hg2', 'Pb'), (1
 solubilityCl = (('Cl', 'Br', 'I', -1), (('Cu', 'Ag', 'Hg2', 'Pb', 'Tl'), (1, 1, 2, 2, 1)))
 solubilitySO = (('So4', -2), (('Ca', 'Sr', 'Ba', 'Ag', 'Hg2', 'Pb', 'Ra'), (2, 2, 2, 1, 2, 2, 2)))
 
-solubilityClO3 = (('Clo3', 'Clo4', 'Ch3coo', -1), (('Rb', 'Cs', 'Ag', 'Hg2'), (1, 2, 1, 2)))
+solubilityClO3 = (('Clo4', 'Ch3coo', -1), (('Rb', 'Cs', 'Ag', 'Hg2'), (1, 2, 1, 2)))
 
 charge1 = ('Li', 'Cu', 'Ag', 'Tl', 'Nh4', 'Rb', 'Nh4')
 charge2 = ('Mg', 'Ca', 'Sr', 'Ba', 'Fe', 'Hg2', 'Pb', 'Ca', 'Sr', 'Ba', 'Ra', 'Cs')
@@ -60,12 +60,12 @@ while repeat:
     negVol = chkPos(chkFloat(input("What is the volume of the negative solution? (L): ")))
     negConc = chkPos(chkFloat(input("What is the concentration of the negative solution? (mol/L): ")))
 
+    # Processing
     posIon = posIon.lower()
     posIon = posIon.capitalize()
 
     negIon = negIon.lower()
     negIon = negIon.capitalize()
-
 
     ### Ion name, volume, and concentration
     pos.append(posIon)
@@ -77,7 +77,7 @@ while repeat:
     neg.append(negConc)
 
 
-    if negIon in solubilityF[0] and posIon in solubilityF[1][0] or negIon in solubilityCl[0] and posIon in solubilityCl[1][0] or negIon in solubilityClO3[0] and posIon in solubilityClO3[1][0] or negIon in solubilitySO[0] and posIon in solubilitySO[1][0]:
+    if negIon in solubilityF[0] and posIon in solubilityF[1][0] or negIon in solubilityCl[0] and posIon in solubilityCl[1][0]  or negIon in solubilitySO[0] and posIon in solubilitySO[1][0] or negIon == solubilityClO3[0][0] and posIon == solubilityClO3[1][0][0] or negIon == solubilityClO3[0][0] and posIon == solubilityClO3[1][0][1] or negIon == solubilityClO3[0][1] and posIon == solubilityClO3[1][0][2] or negIon == solubilityClO3[0][1] and posIon == solubilityClO3[1][0][3]:
         ### Charges
         if negIon in solubilityF[0] or negIon in solubilityCl[0] or negIon in solubilityClO3[0]:
             neg.append(-1)
@@ -108,11 +108,11 @@ while repeat:
         if chargePos == '1' and chargeNeg == '1':
             finalProduct = [namePos, nameNeg]
         elif chargePos == '1' and chargeNeg != '1':
-            finalProduct = [namePos, nameNeg, '(', chargeNeg, ')']
+            finalProduct = [namePos,'(', nameNeg,')', chargeNeg]
         elif chargeNeg == '1' and chargePos != '1':
-            finalProduct = [namePos, '(', chargePos, ')', nameNeg]
+            finalProduct = ['(', namePos, ')',  chargePos, nameNeg]
         else:
-            finalProduct = [namePos, '(', chargePos, ')', nameNeg, '(', chargeNeg, ')']
+            finalProduct = ['(', namePos,')', chargePos,'(',  nameNeg, ')',  chargeNeg]
         finalProduct = ''.join(finalProduct)
 
         ### Mass
