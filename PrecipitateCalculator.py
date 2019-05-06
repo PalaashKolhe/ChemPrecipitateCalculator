@@ -47,7 +47,7 @@ massData = (('F', 19.00), ('Li', 6.94), ('Mg', 24.31), ('Ca', 40.08), ('Sr', 87.
 
 ## Start Menu
 print('''
-Welcome to Precipitate Calculator
+Welcome to Precipitate Calculator!
 Enter your two elements and we figure out if the solution forms a precipitate. If it does we give you the balanced reaction, the limiting reagent, and the mass of tbe precipitate.
 ''')
 
