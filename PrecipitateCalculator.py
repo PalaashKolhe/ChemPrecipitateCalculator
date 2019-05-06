@@ -164,8 +164,5 @@ while repeat:
 
     ### Try Again
     repeat = tryAgain(input("Would you like to calculate solubility again? Y/n: "))
-
-
-
-
-
+print('''
+Thank you for using Precipitate Calculator!''')
