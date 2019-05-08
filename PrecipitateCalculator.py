@@ -30,13 +30,20 @@ def chkPos(num):
         num = chkFloat(num)
         return chkPos(num)
 
+def chkFeCharge(charge):
+    if charge in (2, 3):
+        return charge:
+    else:
+        charge = input("Please enter a charge of 2 or 3: ")
+        return chkFeCharge(charge)
+
 ## Arrays
 solubilityF = (('F', -1), (('Li', 'Mg', 'Ca', 'Sr', 'Ba', 'Fe', 'Hg2', 'Pb'), (1, 2, 2, 2, 2, 2, 2, 2))) ## Charges added at the end to allow me to find charge of element quickly
 solubilityCl = (('Cl', 'Br', 'I', -1), (('Cu', 'Ag', 'Hg2', 'Pb', 'Tl'), (1, 1, 2, 2, 1)))
 solubilitySO = (('So4', -2), (('Ca', 'Sr', 'Ba', 'Ag', 'Hg2', 'Pb', 'Ra'), (2, 2, 2, 1, 2, 2, 2)))
 solubilityClO3 = (('Clo4', 'Ch3coo', -1), (('Rb', 'Cs', 'Ag', 'Hg2'), (1, 2, 1, 2)))
 solubilityCO3 = (('Co3', 'Po4', 'So3', -2. -3. -2), ('H', 'Li', 'Na', 'K', 'Rb', 'Cs', 'Fr', 'Nh4'))
-solubilityIO3 = (('Io3', 'Ooccoo', -1, -2), ('H', 'Li', 'Na', 'K', 'Rb', 'Cs', 'Fr', 'Nh4', 'Co' , 'Fe')) # Co, Fe 3+
+solubilityIO3 = (('Io3', 'Ooccoo', -1, -2), ('H', 'Li', 'Na', 'K', 'Rb', 'Cs', 'Fr', 'Nh4', 'Co' , 'Fe'))
 solubilityOH = (('Oh', -1), ('H', 'Li', 'Na', 'K', 'Rb', 'Cs', 'Fr', 'Nh4'))
 
 charge1 = ('Li', 'Cu', 'Ag', 'Tl', 'Nh4', 'Rb', 'Nh4', 'Na', 'K', 'Rb', 'Cs', 'Fr', 'Ag')
@@ -92,6 +99,12 @@ while repeat:
     neg.append(negVol)
     neg.append(negConc)
 
+    if posIon == 'Fe' and negIon == 'Ooccoo':
+        askPosCharge = chkFeCharge(chkFloat(input("What is the charge of Fe? (2 or 3): ")))
+        if askPosCharge == 3:
+            pass
+        else:
+            break
 
     if negIon in solubilityF[0] and posIon in solubilityF[1][0] or negIon in solubilityCl[0] and posIon in solubilityCl[1][0]  or negIon in solubilitySO[0] and posIon in solubilitySO[1][0] or negIon == solubilityClO3[0][0] and posIon == solubilityClO3[1][0][0] or negIon == solubilityClO3[0][0] and posIon == solubilityClO3[1][0][1] or negIon == solubilityClO3[0][1] and posIon == solubilityClO3[1][0][2] or negIon == solubilityClO3[0][1] and posIon == solubilityClO3[1][0][3] or negIon in solubilityCO3[0] and posIon not in solubilityCO3[1] or negIon in solubilityIO3[0] and posIon not in solubilityIO3[1] or negIon in solubilityOH[0] and posIon not in solubilityOH[1]:
 
