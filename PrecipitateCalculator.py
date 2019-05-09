@@ -32,7 +32,7 @@ def chkPos(num):
 
 def chkFeCharge(charge):
     if charge in (2, 3):
-        return charge:
+        return charge
     else:
         charge = input("Please enter a charge of 2 or 3: ")
         return chkFeCharge(charge)
@@ -43,7 +43,7 @@ solubilityCl = (('Cl', 'Br', 'I', -1), (('Cu', 'Ag', 'Hg2', 'Pb', 'Tl'), (1, 1, 
 solubilitySO = (('So4', -2), (('Ca', 'Sr', 'Ba', 'Ag', 'Hg2', 'Pb', 'Ra'), (2, 2, 2, 1, 2, 2, 2)))
 solubilityClO3 = (('Clo4', 'Ch3coo', -1), (('Rb', 'Cs', 'Ag', 'Hg2'), (1, 2, 1, 2)))
 solubilityCO3 = (('Co3', 'Po4', 'So3', -2. -3. -2), ('H', 'Li', 'Na', 'K', 'Rb', 'Cs', 'Fr', 'Nh4'))
-solubilityIO3 = (('Io3', 'Ooccoo', -1, -2), ('H', 'Li', 'Na', 'K', 'Rb', 'Cs', 'Fr', 'Nh4', 'Co' , 'Fe'))
+solubilityIO3 = (('Io3', 'Ooccoo', -1, -2), ('H', 'Li', 'Na', 'K', 'Rb', 'Cs', 'Fr', 'Nh4', 'Co' , 'Fe3'))
 solubilityOH = (('Oh', -1), ('H', 'Li', 'Na', 'K', 'Rb', 'Cs', 'Fr', 'Nh4'))
 
 charge1 = ('Li', 'Cu', 'Ag', 'Tl', 'Nh4', 'Rb', 'Nh4', 'Na', 'K', 'Rb', 'Cs', 'Fr', 'Ag')
@@ -99,14 +99,16 @@ while repeat:
     neg.append(negVol)
     neg.append(negConc)
 
-    if posIon == 'Fe' and negIon == 'Ooccoo':
-        askPosCharge = chkFeCharge(chkFloat(input("What is the charge of Fe? (2 or 3): ")))
-        if askPosCharge == 3:
-            pass
+    if posIon == 'Fe' and negIon == 'Ooccoo': ### To check Fe's charge for solubility in Fe2(OOCCOO)3
+        FeCharge = int(chkFeCharge(chkFloat(input("What is the charge of Fe? (2 or 3): "))))
+        if FeCharge == 3:
+            posIon = 'Fe3'
         else:
-            break
+            posIon = 'Fe2'
+            pos.append(2)
+            pass
 
-    if negIon in solubilityF[0] and posIon in solubilityF[1][0] or negIon in solubilityCl[0] and posIon in solubilityCl[1][0]  or negIon in solubilitySO[0] and posIon in solubilitySO[1][0] or negIon == solubilityClO3[0][0] and posIon == solubilityClO3[1][0][0] or negIon == solubilityClO3[0][0] and posIon == solubilityClO3[1][0][1] or negIon == solubilityClO3[0][1] and posIon == solubilityClO3[1][0][2] or negIon == solubilityClO3[0][1] and posIon == solubilityClO3[1][0][3] or negIon in solubilityCO3[0] and posIon not in solubilityCO3[1] or negIon in solubilityIO3[0] and posIon not in solubilityIO3[1] or negIon in solubilityOH[0] and posIon not in solubilityOH[1]:
+    if negIon in solubilityF[0] and posIon in solubilityF[1][0] or negIon in solubilityCl[0] and posIon in solubilityCl[1][0]  or negIon in solubilitySO[0] and posIon in solubilitySO[1][0] or negIon == solubilityClO3[0][0] and posIon == solubilityClO3[1][0][0] or negIon == solubilityClO3[0][0] and posIon == solubilityClO3[1][0][1] or negIon == solubilityClO3[0][1] and posIon == solubilityClO3[1][0][2] or negIon == solubilityClO3[0][1] and posIon == solubilityClO3[1][0][3] or negIon in solubilityCO3[0] and posIon not in solubilityCO3[1] or negIon in solubilityIO3[0] and posIon not in solubilityIO3[1] or negIon in solubilityOH[0] and posIon not in solubilityOH[1]: ### Checks if positive ion and negative ion form a precipitate
 
         ### Charges
         if negIon in solubilityF[0] or negIon in solubilityCl[0] or negIon in solubilityClO3[0] or negIon == 'Io3' or negIon in solubilityOH[0]:
@@ -116,25 +118,29 @@ while repeat:
         else:
             neg.append(-2)
 
-        if posIon in charge1:
-            pos.append(1)
-        elif posIon in charge2:
-            pos.append(2)
-        elif posIon in charge3:
-            pos.append(3)
-        elif posIon in charge4:
-            pos.append(4)
-        elif posIon in charge5:
-            pos.append(5)
-        elif posIon in charge6:
-            pos.append(6)
-        elif posIon in charge7:
-            pos.append(7)
+        if posIon != 'Fe2': ### If posIon is Fe2 from above, it already has a charge of 2+
+            if posIon in charge1:
+                pos.append(1)
+            elif posIon in charge2:
+                pos.append(2)
+            elif posIon in charge3:
+                pos.append(3)
+            elif posIon in charge4:
+                pos.append(4)
+            elif posIon in charge5:
+                pos.append(5)
+            elif posIon in charge6:
+                pos.append(6)
+            elif posIon in charge7:
+                pos.append(7)
 
         ### Balancing
-        if neg[3] == -2 and pos[3] == 4:
+        if neg[3] == -2 and pos[3] == 4: ### Scenario created by Ge bonding with SO3 or CO3
             pos.append(1)
             neg.append(int(pos[3] / (neg[3] - (neg[3] * 2))))
+        elif (neg[3] - (neg[3] * 2)) == pos[3]: ### In case both charges are equal
+            pos.append(1)
+            neg.append(1)
         else:
             if neg[3] - (neg[3] * 2) == pos[3]:
                 neg.append(neg[3] - (neg[3] * 2))
@@ -183,7 +189,7 @@ while repeat:
             limitingR = pos[0]
         else:
             limit = nPos * pos[4]
-            limitingR = pos[0]
+            limitingR = 1
 
         ### Calculating Mass
         if limitingR == neg[0]:
@@ -198,8 +204,13 @@ while repeat:
         print('''''')
         print(pos[4], pos[0], '+', neg[4], neg[0], ' ==> ', finalProduct)
         print('''''')
-        print('Limiting Reagent is', limitingR)
-        print('The mass of', finalProduct, 'is', mass)
+
+        if limitingR == 1: ## In case there is no limiting reagent
+            print("The masses are equal so there is no limiting reagent.")
+        else:
+            print('Limiting Reagent is', limitingR)
+
+        print('The mass of', finalProduct, 'is', mass, 'grams.')
     else:
         print('Solution is soluble so no precipitate is formed! ')
 
